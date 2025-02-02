@@ -18,7 +18,10 @@ return new class extends Migration
             $table->decimal('price', 18, 2);
             $table->integer('stock')->default(0);
             $table->string('image_url')->nullable();
+            $table->unsignedBigInteger('seller_id');
             $table->timestamps();
+
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
