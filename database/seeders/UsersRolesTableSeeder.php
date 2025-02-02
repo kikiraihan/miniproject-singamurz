@@ -36,6 +36,7 @@ class UsersRolesTableSeeder extends Seeder
         $buyer1 = User::create([
             'name' => 'Buyer User 1',
             'email' => 'buyer1@example.com',
+            'address'=>'RT.16/RW.1, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12810',
             'password' => Hash::make('buyer1@example.com'), // Password di-hash
         ]);
         $buyer1->assignRole('buyer'); // Assign role buyer
@@ -43,6 +44,7 @@ class UsersRolesTableSeeder extends Seeder
         $buyer2 = User::create([
             'name' => 'Buyer User 2',
             'email' => 'buyer2@example.com',
+            'address'=>'RT.16/RW.2, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12810',
             'password' => Hash::make('password'), // Password di-hash
         ]);
         $buyer2->assignRole('buyer'); // Assign role buyer

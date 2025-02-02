@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->decimal('total_amount', 18, 2);
-            $table->string('status')->default('pending');
+            // pending, pengiriman, success
+            $table->string('status')->enum(['payment_pending', 'shipping', 'success'])->default('pending');
+            $table->string('payment_method')->enum(['COD', 'BNI VA', 'BCA VA'])->default('COD');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

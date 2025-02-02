@@ -9,7 +9,7 @@
 
     <!-- Modal Keranjang -->
     @if($isCartOpen)
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div wire:click.self="toggleCart" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div class="bg-white p-6 rounded-lg shadow-lg w-2/3 relative">
                 <h2 class="text-lg font-bold mb-4">Keranjang Belanja</h2>
                 
@@ -37,20 +37,20 @@
                                     <td class="p-2 border">{{ $item['product']['name'] }}</td>
                                     <td class="p-2 border">Rp {{ number_format($item['product']['price'], 0, ',', '.') }}</td>
                                     <td class="p-2 border">
-                                        <button wire:click="decreaseQuantity({{ $item['id'] }})" class="px-2 py-1 bg-red-500 text-white">-</button>
+                                        <button wire:click="decreaseQuantity({{ $item['id'] }})" class="px-2 py-1 bg-red-500 text-white rounded-lg">-</button>
                                         <span class="mx-2">{{ $item['quantity'] }}</span>
-                                        <button wire:click="addToCart({{ $item['product']['id'] }})" class="px-2 py-1 bg-green-500 text-white">+</button>
+                                        <button wire:click="addToCart({{ $item['product']['id'] }})" class="px-2 py-1 bg-green-500 text-white rounded-lg">+</button>
                                     </td>
                                     <td class="p-2 border">Rp {{ number_format($item['product']['price'] * $item['quantity'], 0, ',', '.') }}</td>
                                     <td class="p-2 border">
-                                        <button wire:click="removeItem({{ $item['id'] }})" class="px-2 py-1 bg-red-600 text-white">Hapus</button>
+                                        <button wire:click="removeItem({{ $item['id'] }})" class="px-2 py-1 bg-red-600 text-white rounded-lg">Hapus</button>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <div class="mt-4 text-right">
-                        <button wire:click="checkout" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Checkout</button>
+                        <a href="{{ route('userpage.form-checkout') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Checkout</a>
                     </div>
                 @endif
             </div>
@@ -58,7 +58,7 @@
     @endif
 
     <!-- DataTables Scripts -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     @script
@@ -71,5 +71,5 @@
             ordering: true,
         });
     </script>
-    @endscript
+    @endscript --}}
 </div>

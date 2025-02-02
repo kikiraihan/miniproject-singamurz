@@ -49,12 +49,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-
-    /**
-     * Relasi ke tabel transactions (satu user bisa memiliki banyak transaksi).
-     */
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
 }

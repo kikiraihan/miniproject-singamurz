@@ -5,6 +5,7 @@ use App\Livewire\Landing\DetailProduct;
 use App\Livewire\Landing\ListProduct;
 use App\Livewire\UserPage\Checkout;
 use App\Livewire\UserPage\Dashboard;
+use App\Livewire\UserPage\FormCheckout;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ Route::get('/', ListProduct::class)->name('landing');
 Route::get('/detail/{id}', DetailProduct::class)->name('landing.detail');
 
 Route::get('/checkout', Checkout::class)->name('userpage.checkout');
+Route::get('/form-checkout', FormCheckout::class)->middleware(['auth', 'verified'])->name('userpage.form-checkout');
 
 Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('userpage.dashboard');
 

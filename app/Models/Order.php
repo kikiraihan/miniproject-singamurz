@@ -17,7 +17,8 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_amount',
-        'status', //keranjang, pending, pengiriman, selesai 
+        'status', // 'payment_pending', 'shipping', 'success'
+        'payment_method', // COD, BNI VA, BCA VA
     ];
 
     /**
@@ -36,11 +37,4 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    /**
-     * Relasi ke tabel transactions (satu order bisa memiliki satu transaksi).
-     */
-    public function transaction()
-    {
-        return $this->hasOne(Transaction::class);
-    }
 }

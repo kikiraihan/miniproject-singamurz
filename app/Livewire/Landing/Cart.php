@@ -3,7 +3,6 @@
 namespace App\Livewire\Landing;
 
 use App\Models\Cart as ModelsCart;
-use App\Models\Order;
 use App\Models\Product;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -86,42 +85,6 @@ class Cart extends Component
             ->title('Item dihapus dari keranjang')
             ->success()
             ->send();
-    }
-
-    public function checkout()
-    {
-        $cartItems = ModelsCart::where('user_id', Auth::id())->get();
-        if ($cartItems->isEmpty()) {
-            session()->flash('error', 'Keranjang kosong!');
-            return;
-        }
-
-        $totalPrice = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
-
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'total_amount' => $totalPrice,
-            'status' => 'pending',
-        ]);
-
-        foreach ($cartItems as $item) {
-            $order->orderItems()->create([
-                'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'price' => $item->product->price,
-            ]);
-        }
-
-        // Hapus semua item dari cart setelah checkout
-        ModelsCart::where('user_id', Auth::id())->delete();
-
-        $this->loadCart();
-        return Notification::make()
-            ->title('Pesanana di checkout')
-            ->success()
-            ->send();
-        // session()->flash('success', 'Pesanan berhasil dibuat!');
-        // return redirect()->route('order.details', ['orderId' => $order->id]);
     }
 
     public function render()
