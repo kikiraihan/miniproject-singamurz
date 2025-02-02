@@ -1,4 +1,6 @@
 
+![Deskripsi Gambar](public/images/show.jpeg)
+
 ## Instalation
 
 1. copy .env.example to .env, and adjust your mysql configuration
