@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Landing\DetailProduct;
+use App\Livewire\Landing\ListProduct;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing.list');
-});
+Route::get('/', ListProduct::class)->name('landing');
+Route::get('/detail/{id}', DetailProduct::class)->name('landing.detail');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

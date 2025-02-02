@@ -26,6 +26,7 @@ class UsersRolesTableSeeder extends Seeder
         // Buat seller user
         $seller = User::create([
             'name' => 'Seller User',
+            'shop_name'=> 'Toko Kelontong',
             'email' => 'seller@example.com',
             'password' => Hash::make('password'), // Password di-hash
         ]);

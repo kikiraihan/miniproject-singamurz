@@ -8,14 +8,15 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
+    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'singa': '#16b659',
+                'singa': '#01793B',
+                'singa-secondary': '#b1aa2e',
             },
         },
     },
