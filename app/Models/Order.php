@@ -17,7 +17,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total_amount',
-        'status',
+        'status', //keranjang, pending, pengiriman, selesai 
     ];
 
     /**

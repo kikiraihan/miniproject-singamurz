@@ -36,7 +36,7 @@ class UsersRolesTableSeeder extends Seeder
         $buyer1 = User::create([
             'name' => 'Buyer User 1',
             'email' => 'buyer1@example.com',
-            'password' => Hash::make('password'), // Password di-hash
+            'password' => Hash::make('buyer1@example.com'), // Password di-hash
         ]);
         $buyer1->assignRole('buyer'); // Assign role buyer
 

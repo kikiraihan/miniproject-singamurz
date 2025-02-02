@@ -6,6 +6,7 @@
     <title>Singa Murz E-commerce</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition duration-300">
     
@@ -16,5 +17,7 @@
 
     {{$slot}}
 
+    
+    @livewireScripts
 </body>
 </html>

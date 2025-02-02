@@ -51,8 +51,9 @@
 
                     <!-- Add to Cart Button -->
                     <div class="mt-6">
-                        <button
-                            class="bg-singa dark:bg-singa-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 dark:hover:bg-opacity-90 flex items-center transition duration-300">
+                        <button class="bg-singa dark:bg-singa-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 dark:hover:bg-opacity-90 flex items-center transition duration-300"
+                            wire:click="$dispatch('addToCart', ['Product Name', 20.99])">
+                            {{-- onclick="addToCart('{{ $item->name }}', {{ $item->price }})" --}}
                             <i class='bx bx-cart-add mr-2'></i>Add to Cart
                         </button>
                     </div>

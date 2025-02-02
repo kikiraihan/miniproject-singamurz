@@ -4,12 +4,13 @@
 
         @forelse ($products as $item)
         <!-- Product Card -->
-        <a href="{{ route('landing.detail', ['id' => $item->id]) }}" 
-            class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col h-full justify-between transition duration-300 hover:ring-2 hover:ring-singa dark:hover:ring-singa-secondary">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col h-full justify-between transition duration-300 hover:ring-2 hover:ring-singa dark:hover:ring-singa-secondary">
          
             
             <!-- Gambar Produk -->
-            <img src="{{ $item->image_url }}" alt="{{ $item->name }}" class="w-full h-48 object-cover">
+            <a href="{{ route('landing.detail', ['id' => $item->id]) }}">
+                <img src="{{ $item->image_url }}" alt="{{ $item->name }}" class="w-full h-48 object-cover">
+            </a>
         
             <!-- Konten Card -->
             <div class="p-4 flex flex-col flex-grow">
@@ -24,11 +25,12 @@
                     <span class="text-singa font-bold dark:text-gray-300 text-sm">Qty: {{ $item->stock }}</span>
                 </div>
                 <button class="bg-singa text-white px-4 py-2 rounded-md hover:bg-singa flex items-center w-full justify-center transition duration-300 dark:bg-singa-secondary dark:hover:bg-singa-secondary"
-                    onclick="addToCart('{{ $item->name }}', {{ $item->price }})">
+                    wire:click="$dispatch('addToCartFromClient', [{{$item->id}}])" >
+                    {{-- onclick="addToCart('{{ $item->name }}', {{ $item->price }})" --}}
                     <i class='bx bx-cart-add mr-2'></i>Add to Cart
                 </button>
             </div>
-        </a>
+        </div>
         @empty
         <p>No products found.</p>
         @endforelse

@@ -29,12 +29,18 @@
                 <i id="theme-icon" class='bx bx-moon'></i>
             </button>
 
-            <!-- Cart Button -->
-            <button id="cartButton" class="text-gray-600 dark:text-gray-300 hover:text-singa text-2xl relative">
-                <i class='bx bx-cart'></i>
-                <span id="cartCount"
-                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">0</span>
-            </button>
+            @livewire('landing.cart')
+
+            {{-- login --}}
+            @auth
+            <a href="{{ route('dashboard') }}" class="text-gray-600 dark:text-gray-300 hover:text-singa text-2xl">
+                <i class='bx bx-user'></i>
+            </a>
+            @else
+            <a href="{{ route('login') }}" class="text-gray-600 dark:text-gray-300 hover:text-singa text-2xl">
+                <i class='bx bx-user'></i>
+            </a>
+            @endauth
         </div>
     </div>
 </header>
@@ -105,7 +111,7 @@
 
 </script>
 
-<script>
+{{-- <script>
     let cart = [];
     let cartCount = 0;
 
@@ -147,4 +153,4 @@
         document.getElementById('cartModal').classList.add('hidden');
     });
 
-</script>
+</script> --}}
