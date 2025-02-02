@@ -1,11 +1,16 @@
-<header class="bg-white dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-10 transition duration-300">
+<header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 left-0 right-0  transition duration-300 z-30">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <!-- Toggle Button for Mobile -->
+        <div class="flex gap-4">
+            
+    
+            <a href="{{ route('landing', ['search'=>null]) }}"
+                class="text-2xl font-bold text-singa dark:text-white flex items-center">
+                <img src="{{ asset('images/singa.png') }}" alt="Logo" class="h-8 mr-2">
+                SingaMurz
+            </a>
+        </div>
 
-        <a href="{{ route('landing', ['search'=>null]) }}"
-            class="text-2xl font-bold text-singa dark:text-white flex items-center">
-            <img src="{{ asset('images/singa.png') }}" alt="Logo" class="h-8 mr-2">
-            SingaMurz
-        </a>
 
         <!-- Search Bar -->
         <div class="w-full max-w-xl mx-4">
@@ -25,7 +30,7 @@
         <div class="flex items-center gap-4">
             <!-- Dark Mode Toggle -->
             <button id="theme-toggle"
-                class="p-2 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-white shadow-md transition duration-300">
+                class="px-2 py-1 rounded-full hover:bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-white shadow-md transition duration-300">
                 <i id="theme-icon" class='bx bx-moon'></i>
             </button>
 
@@ -33,7 +38,7 @@
 
             {{-- login --}}
             @auth
-            <a href="{{ route('dashboard') }}" class="text-gray-600 dark:text-gray-300 hover:text-singa text-2xl">
+            <a href="{{ route('userpage.dashboard') }}" class="text-gray-600 dark:text-gray-300 hover:text-singa text-2xl">
                 <i class='bx bx-user'></i>
             </a>
             @else
@@ -110,47 +115,3 @@
     }
 
 </script>
-
-{{-- <script>
-    let cart = [];
-    let cartCount = 0;
-
-    function addToCart(productName, price) {
-        cart.push({
-            name: productName,
-            price: price
-        });
-        cartCount++;
-        updateCartCount();
-    }
-
-    function updateCartCount() {
-        document.getElementById('cartCount').innerText = cartCount;
-    }
-
-    function displayCart() {
-        const cartItems = document.getElementById('cartItems');
-        const cartTotal = document.getElementById('cartTotal');
-        cartItems.innerHTML = '';
-        let total = 0;
-
-        cart.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-            cartItems.appendChild(li);
-            total += item.price;
-        });
-
-        cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-    }
-
-    document.getElementById('cartButton').addEventListener('click', function () {
-        displayCart();
-        document.getElementById('cartModal').classList.remove('hidden');
-    });
-
-    document.getElementById('closeCart').addEventListener('click', function () {
-        document.getElementById('cartModal').classList.add('hidden');
-    });
-
-</script> --}}

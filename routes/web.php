@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Landing\DetailProduct;
 use App\Livewire\Landing\ListProduct;
+use App\Livewire\UserPage\Checkout;
+use App\Livewire\UserPage\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ListProduct::class)->name('landing');
 Route::get('/detail/{id}', DetailProduct::class)->name('landing.detail');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/checkout', Checkout::class)->name('userpage.checkout');
+
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('userpage.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

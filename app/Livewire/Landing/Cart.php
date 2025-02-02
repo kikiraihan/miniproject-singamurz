@@ -5,6 +5,7 @@ namespace App\Livewire\Landing;
 use App\Models\Cart as ModelsCart;
 use App\Models\Order;
 use App\Models\Product;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -33,22 +34,29 @@ class Cart extends Component
     }
 
     // Tambahkan item ke keranjang
-    public function addToCart($productId)
+    public function addToCart($productId, $quantity=1)
     {
         $product = Product::findOrFail($productId);
         $cartItem = ModelsCart::where('user_id', Auth::id())->where('product_id', $productId)->first();
 
         if ($cartItem) {
-            $cartItem->increment('quantity');
+            $cartItem->quantity=$cartItem->quantity+$quantity;
+            $cartItem->save();
         } else {
             ModelsCart::create([
                 'user_id' => Auth::id(),
                 'product_id' => $productId,
-                'quantity' => 1,
+                'quantity' => $quantity ? $quantity:1,
             ]);
         }
 
+        
         $this->loadCart();
+        
+        return Notification::make()
+            ->title('Item ditambahkan ke keranjang')
+            ->success()
+            ->send();
     }
 
     // Kurangi item dari keranjang
@@ -62,6 +70,11 @@ class Cart extends Component
         }
 
         $this->loadCart();
+
+        return Notification::make()
+            ->title('Item dikurangi dari keranjang')
+            ->success()
+            ->send();
     }
 
     // Hapus item dari keranjang
@@ -69,6 +82,10 @@ class Cart extends Component
     {
         ModelsCart::findOrFail($cartId)->delete();
         $this->loadCart();
+        return Notification::make()
+            ->title('Item dihapus dari keranjang')
+            ->success()
+            ->send();
     }
 
     public function checkout()
@@ -83,7 +100,7 @@ class Cart extends Component
 
         $order = Order::create([
             'user_id' => Auth::id(),
-            'total_price' => $totalPrice,
+            'total_amount' => $totalPrice,
             'status' => 'pending',
         ]);
 
@@ -98,8 +115,13 @@ class Cart extends Component
         // Hapus semua item dari cart setelah checkout
         ModelsCart::where('user_id', Auth::id())->delete();
 
-        session()->flash('success', 'Pesanan berhasil dibuat!');
-        return redirect()->route('order.details', ['orderId' => $order->id]);
+        $this->loadCart();
+        return Notification::make()
+            ->title('Pesanana di checkout')
+            ->success()
+            ->send();
+        // session()->flash('success', 'Pesanan berhasil dibuat!');
+        // return redirect()->route('order.details', ['orderId' => $order->id]);
     }
 
     public function render()

@@ -8,22 +8,21 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @filamentStyles
     {{-- @livewireStyles --}}
-
-    
-    {{-- sweetalert --}}
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition duration-300">
     
     @include('landing.header')
 
-    <!-- Tombol Dark Mode -->
-    
+    <!-- Sidebar -->
+    <div class="flex">
+        @include('landing.sidebar-user')
 
-    {{$slot}}
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            {{$slot}}
+        </main>
+    </div>
 
-    
-    {{-- @livewireScripts --}}
     @livewire('notifications') 
     @filamentScripts
 

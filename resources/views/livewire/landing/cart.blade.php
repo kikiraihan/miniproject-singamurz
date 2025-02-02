@@ -1,27 +1,27 @@
 <div>
     <!-- Ikon Keranjang Belanja -->
-    <button wire:click="toggleCart" class="relative p-2 bg-gray-200 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l1 5h13l1-5h2M5 10h14l-1 9H6l-1-9m5 9a1 1 0 100-2 1 1 0 000 2zm6 0a1 1 0 100-2 1 1 0 000 2z" />
-        </svg>
-        @if(count($cartItems) > 0)
-            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                {{ count($cartItems) }}
-            </span>
-        @endif
+    <button wire:click="toggleCart" class="relative px-2 py-1 rounded-full hover:bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-white shadow-md transition duration-300">
+        <i class='bx bx-cart mr-4 text-lg'></i>
+        <span class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+            {{ count($cartItems) }}
+        </span>
     </button>
 
     <!-- Modal Keranjang -->
     @if($isCartOpen)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-2/3 relative">
                 <h2 class="text-lg font-bold mb-4">Keranjang Belanja</h2>
-                <button wire:click="toggleCart" class="absolute top-2 right-2 text-gray-600">&times;</button>
                 
+                <!-- Tombol Close dengan Boxicons -->
+                <button wire:click="toggleCart" class="absolute top-2 right-2 text-gray-600">
+                    <i class="bx bx-x text-3xl"></i>
+                </button>
+
                 @if(empty($cartItems))
                     <p>Keranjang kosong.</p>
                 @else
-                    <table class="w-full border-collapse border border-gray-300">
+                    <table id="cartTable" class="w-full border-collapse border border-gray-300 display">
                         <thead>
                             <tr class="bg-gray-200">
                                 <th class="p-2 border">Produk</th>
@@ -49,8 +49,27 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-4 text-right">
+                        <button wire:click="checkout" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Checkout</button>
+                    </div>
                 @endif
             </div>
         </div>
     @endif
+
+    <!-- DataTables Scripts -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    @script
+    <script>
+        $('#cartTable').DataTable({
+            destroy: true,
+            responsive: true,
+            paging: true,
+            searching: true,
+            ordering: true,
+        });
+    </script>
+    @endscript
 </div>

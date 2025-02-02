@@ -8,6 +8,7 @@ use Livewire\Component;
 class DetailProduct extends Component
 {
     public $id;
+    public $qty;
 
     public function mount($id){
         $this->$id=$id;

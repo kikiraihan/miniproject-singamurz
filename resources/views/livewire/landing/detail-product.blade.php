@@ -1,4 +1,4 @@
-<main class="container mx-auto px-4 lg:px-36 py-8 mt-20">
+<main class="container mx-auto px-4 lg:px-36 py-8">
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden col-span-3 transition duration-300">
         <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
             <!-- Image Section -->
@@ -26,7 +26,7 @@
 
                     <!-- Price -->
                     <div class="mt-4">
-                        <span class="text-singa dark:text-singa-secondary font-bold text-xl">Rp. {{$prod->price}}</span>
+                        <span class="text-singa dark:text-singa-secondary font-bold text-xl">Rp. {{ number_format($prod->price, 0, ',', '.') }}</span>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                     <!-- Quantity Selector -->
                     <div class="mt-4 flex items-center">
                         <span class="mr-2 text-gray-600 dark:text-gray-300">Quantity:</span>
-                        <select id="quantity"
+                        <select wire:model.live="qty"
                             class="rounded border appearance-none border-gray-300 dark:border-gray-600 py-2 focus:outline-none focus:ring-2 focus:ring-singa dark:focus:ring-singa-secondary text-base pl-3 pr-10 bg-white dark:bg-gray-700 dark:text-gray-200">
                             <option>1</option>
                             <option>2</option>
@@ -47,13 +47,13 @@
                             <option>4</option>
                             <option>5</option>
                         </select>
+                        ini: {{$qty}}
                     </div>
 
                     <!-- Add to Cart Button -->
                     <div class="mt-6">
                         <button class="bg-singa dark:bg-singa-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 dark:hover:bg-opacity-90 flex items-center transition duration-300"
-                            wire:click="$dispatch('addToCart', ['Product Name', 20.99])">
-                            {{-- onclick="addToCart('{{ $item->name }}', {{ $item->price }})" --}}
+                            wire:click="$dispatch('addToCartFromClient', [{{$id}},{{$qty}}])" >
                             <i class='bx bx-cart-add mr-2'></i>Add to Cart
                         </button>
                     </div>
